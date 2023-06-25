@@ -33,9 +33,9 @@ print()
 
 # Create a dictionary that will contain all possible winning combinations,
 # the way it is organized is based on the assumption that the human chose
-# the key as their object and the computer chose one of the values; 
-# this way we can avoid writing out the numerous if statements we would 
-# otherwise need;
+# the key as their object and the computer chose one of the subkeys;
+# if the inverse is true, then that means it is a losing combination, from the
+# perspective of the human;
 win_combos = {
         
         'rock': {
@@ -65,45 +65,10 @@ win_combos = {
 
 }
 
-'''
-# Create a dictionary that will contain all possible losing combinations,
-# the way it is organized is based on the assumption that the human chose
-# the key as their object and the computer chose one of the values; 
-
-lose_combos = {
-
-        'rock': {
-            'paper': "Paper covers rock",
-            'lizard': "Spock vaporizes rock"
-        },
-        
-        'paper': {
-            'rock': "Paper covers rock",
-            'Spock': "Paper disproves Spock"
-        },
-
-        'scissors': {
-            'paper': "Scissors cut paper",
-            'lizard': "Scissors decapitate lizard"
-        },
-
-        'lizard': {
-            'paper': "Lizard eats paper",
-            'Spock': "Lizard poisons Spock"
-        },
-
-        'Spock': {
-            'rock': "Spock vaporizes rock",
-            'scissors': "Spock smashes scissors"
-        }
 
 
-}
-'''
-
-
-# These will be tacked onto the ends of the print statements from the 
-# dictionary above;
+# One of these will be tacked onto the ends of the print statements from the 
+# dictionary above (unless it was a draw);
 
 win_msg = ", therefore you win!"
 
@@ -113,15 +78,21 @@ lose_msg = ", therefore you lose!"
 # This if statement ensures the rest of the program doesn't run in the case
 # of improper input, e.g. "Bicycle";
 if human in objects:
-   
+    
     if human == computer:
         print(f"You and the computer both chose {human}, it's a draw!")
         print()
 
+    # The win_combos dictionary keys are the human's choice, and the subkeys
+    # are the computer's choice; ergo if the combination of these choices can
+    # be found in the dictionary, in this order, then the human must have won;
     elif computer in win_combos[human]:
         print(win_combos[human][computer]+win_msg)
         print()
-    
+   
+    # Conversely, if the combination cannot be found in win_combos, then it 
+    # must be a losing combination; ergo we swap the positions of the key and
+    # subkey, which means it must be a losing combination;
     elif human in win_combos[computer]:
         print(win_combos[computer][human]+lose_msg)
         print()
@@ -131,41 +102,3 @@ else:
             "beginning.")
     print()
 
-'''
-# This if statement ensures the rest of the program doesn't run in the case
-# of improper input, e.g. "Bicycle";
-if human in objects:
-
-    if human == "rock" and computer == "paper":
-        print("Paper covers rock, therefore you lose!")
-        print()
-
-    elif human == "rock" and computer == "scissors":
-        print("Rock breaks scissors, therefore you win!")
-        print()
-
-    elif human == "paper" and computer == "scissors":
-        print("Scissors cut paper, therefore you lose!")
-        print()
-
-    elif human == "paper" and computer == "rock":
-        print("Paper covers rock, therefore you win!")
-        print()
-
-    elif human == "scissors" and computer == "rock":
-        print("Rock breaks scissors, therefore you lose!")
-        print()
-
-    elif human == "scissors" and computer == "paper":
-        print("Scissors cut paper, therefore you win!")
-        print()
-
-    else:
-        print("Both you and the computer chose the same object, therefore it's a stalemate.")
-        print()
-
-else:
-    print("This is an invalid input, please run the program again from the\n"
-            "beginning.")
-    print()
-'''
